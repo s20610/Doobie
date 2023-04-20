@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:doobie/DTO/weed_strain.dart';
-import 'package:doobie/views/weed_strain_details_view.dart';
+import 'package:doobie/views/strain_details_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -71,7 +71,7 @@ class _StrainsViewState extends State<StrainsView> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => WeedStrainDetails(weedStrain: strain),
+                  builder: (context) => StrainDetailsPage(strainDetails: strain),
                 ),
               );
             },
