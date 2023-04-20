@@ -14,12 +14,34 @@ class StrainsView extends StatefulWidget {
 
 class _StrainsViewState extends State<StrainsView> {
   List<WeedStrain> _strains = [];
+  final TextEditingController _searchController = TextEditingController();
+
+  List<WeedStrain> _filteredStrains = [];
+
+  Future<void> _performSearch() async {
+    setState(() {
+      _filteredStrains = _strains
+          .where((element) =>
+          element.strain
+              .toLowerCase()
+              .contains(_searchController.text.toLowerCase()))
+          .toList();
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     _fetchStrains();
+    _searchController.addListener(_performSearch);
   }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
 
   Future<void> _fetchStrains() async {
     final response = await http.get(
@@ -45,23 +67,29 @@ class _StrainsViewState extends State<StrainsView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: const Text('Look up some gas ⛽🔥',style:
-          TextStyle(color: Colors.black),),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.search, color: Colors.deepPurple,size: 30,),
+        leading: const Icon(Icons.search, color: Colors.deepPurple,),
+        title: TextField(
+          controller: _searchController,
+          style: const TextStyle(color: Colors.black),
+          cursorColor: Colors.black,
+          decoration: const InputDecoration(
+            hintText: 'Search...',
+            hintStyle: TextStyle(color: Colors.black),
+            border: InputBorder.none,
           ),
-        ],
+          onChanged: (value) {
+            // Perform search functionality here
+          },
+        ),
       ),
       body: _strains.isEmpty
           ? const Center(
         child: CircularProgressIndicator(),
       )
           : ListView.builder(
-        itemCount: _strains.length,
+        itemCount: _filteredStrains.length,
         itemBuilder: (BuildContext context, int index) {
-          final strain = _strains[index];
+          final strain = _filteredStrains[index];
           return ListTile(
             leading: Image.network(strain.imgThumb),
             title: Text(strain.strain),
@@ -71,14 +99,15 @@ class _StrainsViewState extends State<StrainsView> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => StrainDetailsPage(strainDetails: strain),
+                  builder: (context) =>
+                      StrainDetailsPage(strainDetails: strain),
                 ),
               );
             },
           );
         },
-      ),
+      )
+      ,
     );
   }
 }
-
