@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "602271285218",
+    "project_id": "doobie-8290d",
+    "storage_bucket": "doobie-8290d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602271285218:android:dd08f5e79e2586afc343bb",
+        "android_client_info": {
+          "package_name": "borysante.me.doobie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "602271285218-vptqkbk9dr39ac37uqqeibo4uckan2ee.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARtmNqtioNZ6IC5ZhsxX5YzVIDMiku5Qg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "602271285218-vptqkbk9dr39ac37uqqeibo4uckan2ee.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
