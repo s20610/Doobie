@@ -62,7 +62,6 @@ class StrainDetailsPageState extends State<StrainDetailsPage> {
           _buildStatItem('Climate', widget.strainDetails.climate),
           _buildStatItem('Indoor Yield', '${widget.strainDetails.indoorYieldInGramsMax}g'),
           _buildStatItem('Outdoor Yield', '${widget.strainDetails.outdoorYieldInGramsMax}g'),
-          _buildStatItem('Height', '${widget.strainDetails.heightInInchesMin}-${widget.strainDetails.heightInInchesMax} inches'),
           _buildStatItem('Good Effects', widget.strainDetails.goodEffects),
           _buildStatItem('Side Effects', widget.strainDetails.sideEffects),
         ],
