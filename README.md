@@ -1,16 +1,17 @@
 # doobie
 
-Fun project created because of 420 day.
+Fun project created because of 420 day. Whole app is created using Flutter, Firebase and readily available APIs.
 
-## Getting Started
+# App Functionalities
 
-This project is a starting point for a Flutter application.
+* Browsing cannabis strains, searching for particular strain
+* Reading detailed information about strains
 
-A few resources to get you started if this is your first Flutter project:
+# TODO
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* Browsing and reading news about cannabis industry
+* Browsing new deals in Promotions sections
+* Settings view
+* Login/Register Account
+* Add strain to favourites
+* Add photos/browse photos of strain
