@@ -18,8 +18,9 @@ class StrainDetailsViewState extends State<StrainDetailsView> {
   bool _isFavorite = false;
   String email = 'borys@ukotka.com';
 
-  void isStrainInFavorites() async{
-    _isFavorite = await widget.firestoreService.isStrainInTriedStrains(userEmail: email, strainName: widget.strainDetails.strain);
+  void isStrainInFavorites() async {
+    _isFavorite = await widget.firestoreService.isStrainInTriedStrains(
+        userEmail: email, strainName: widget.strainDetails.strain);
   }
 
   @override
@@ -36,19 +37,23 @@ class StrainDetailsViewState extends State<StrainDetailsView> {
         actions: [
           IconButton(
             onPressed: () async {
-              if(_isFavorite){
-                await widget.firestoreService.removeStrainFromTriedStrains(userEmail: email, strainName: widget.strainDetails.strain);
+              if (_isFavorite) {
+                await widget.firestoreService.removeStrainFromTriedStrains(
+                    userEmail: email, strainName: widget.strainDetails.strain);
                 setState(() {
                   _isFavorite = false;
                 });
-              }else{
-                await widget.firestoreService.addStrainToTriedStrains(userEmail: email, strainName: widget.strainDetails.strain);
+              } else {
+                await widget.firestoreService.addStrainToTriedStrains(
+                    userEmail: email, strainName: widget.strainDetails.strain);
                 setState(() {
                   _isFavorite = true;
                 });
               }
             },
-            icon: _isFavorite ? const Icon(Icons.favorite) : const Icon(Icons.favorite_border),
+            icon: _isFavorite
+                ? const Icon(Icons.favorite)
+                : const Icon(Icons.favorite_border),
           ),
         ],
       ),
@@ -182,4 +187,3 @@ class StrainDetailsViewState extends State<StrainDetailsView> {
     );
   }
 }
-
