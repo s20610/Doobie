@@ -23,7 +23,6 @@ class FirebaseCloudStorage {
       .snapshots()
       .map((event) => event.docs.map((doc) => WeedStrain.fromSnapshot(doc)));
 
-
   //Comments methods
   Future<Comments> getAllCommentsUnderStrain(
       {required String strainName}) async {
@@ -90,6 +89,19 @@ class FirebaseCloudStorage {
     }
   }
 
+  Future<bool> isStrainInTriedStrains(
+      {required String userEmail, required String strainName}) async {
+    final docReference = userData.doc(userEmail);
+    final doc = await docReference.get();
+
+    if (doc.exists) {
+      final userDataObjectFromFirestore = UserData.fromSnapshot(doc);
+      return userDataObjectFromFirestore.triedStrains.contains(strainName);
+    } else {
+      return false;
+    }
+  }
+
   Future<void> addStrainToTriedStrains(
       {required String userEmail, required String strainName}) async {
     final docReference = userData.doc(userEmail);
@@ -98,12 +110,14 @@ class FirebaseCloudStorage {
     if (doc.exists) {
       final userDataObjectFromFirestore = UserData.fromSnapshot(doc);
       userDataObjectFromFirestore.triedStrains.add(strainName);
-      await docReference.update(
-          {triedStrainsArrayFieldName: userDataObjectFromFirestore.triedStrains});
+      await docReference.update({
+        triedStrainsArrayFieldName: userDataObjectFromFirestore.triedStrains
+      });
     } else {
       final List<String> listOfTriedStrainsWithNewStrain = [strainName];
-      await userData.doc(userEmail).set(
-          {triedStrainsArrayFieldName: listOfTriedStrainsWithNewStrain});
+      await userData
+          .doc(userEmail)
+          .set({triedStrainsArrayFieldName: listOfTriedStrainsWithNewStrain});
     }
   }
 
@@ -113,8 +127,8 @@ class FirebaseCloudStorage {
     final doc = await docReference.get();
 
     final userDataObjectFromFirestore = UserData.fromSnapshot(doc);
-    userDataObjectFromFirestore.triedStrains.removeWhere((triedStrain) =>
-        triedStrain == strainName);
+    userDataObjectFromFirestore.triedStrains
+        .removeWhere((triedStrain) => triedStrain == strainName);
 
     await docReference.update(
         {triedStrainsArrayFieldName: userDataObjectFromFirestore.triedStrains});

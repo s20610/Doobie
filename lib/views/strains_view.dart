@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:doobie/DTO/weed_strain.dart';
 import 'package:doobie/services/cloud/firebase_cloud_storage.dart';
 import 'package:doobie/views/strain_details_view.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class StrainsView extends StatefulWidget {
   const StrainsView({Key? key}) : super(key: key);
@@ -92,7 +89,7 @@ class _StrainsViewState extends State<StrainsView> {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  StrainDetailsView(strainDetails: strain),
+                                  StrainDetailsView(strainDetails: strain, firestoreService: _firestoreService)
                             ),
                           );
                         },

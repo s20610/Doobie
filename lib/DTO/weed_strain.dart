@@ -39,28 +39,6 @@ class WeedStrain {
     required this.imgThumb,
   });
 
-  // factory WeedStrain.fromJson(Map<String, dynamic> json) {
-  //   return WeedStrain(
-  //     id: json['id'],
-  //     strain: json['strain'],
-  //     thc: json['thc']??"Unknown",
-  //     cbd: json['cbd']??"Unknown",
-  //     cbg: json['cbg']??"Unknown",
-  //     strainType: json['strainType']??"Unknown",
-  //     climate: json['climate']??"Unknown",
-  //     difficulty: json['difficulty']??"Unknown",
-  //     indoorYieldInGramsMax: json['indoorYieldInGramsMax']??0,
-  //     outdoorYieldInGramsMax: json['outdoorYieldInGramsMax']??0,
-  //     floweringWeeksMin: json['floweringWeeksMin']??0,
-  //     floweringWeeksMax: json['floweringWeeksMax']??0,
-  //     heightInInchesMin: json['heightInInchesMin']??0,
-  //     heightInInchesMax: json['heightInInchesMax']??0,
-  //     goodEffects: json['goodEffects']??"Unknown",
-  //     sideEffects: json['sideEffects']??"Unknown",
-  //     imgThumb: json['imgThumb']??"Unknown",
-  //   );
-  // }
-
   WeedStrain.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
       : id = snapshot.data()['id'],
         strain = snapshot.data()['strain'],
