@@ -1,11 +1,10 @@
 import 'package:doobie/constants/route_strings.dart';
-import 'package:doobie/views/login_view.dart';
+import 'package:doobie/firebase_options.dart';
 import 'package:doobie/views/my_account_view.dart';
 import 'package:doobie/views/news_view.dart';
 import 'package:doobie/views/promotions_view.dart';
-import 'package:doobie/views/register_view.dart';
 import 'package:doobie/views/strains_view.dart';
-import 'package:doobie/views/verify_email_view.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:global_bottom_navigation_bar/widgets/bottom_navigation_item.dart';
 import 'package:global_bottom_navigation_bar/widgets/scaffold_bottom_navigation.dart';
@@ -23,28 +22,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Doobie',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.green,
         focusColor: Colors.deepPurple,
         secondaryHeaderColor: Colors.blueGrey,
       ),
       home: const HomePage(),
       routes: {
-        loginRoute: (context) => const LoginView(),
-        registerRoute: (context) => const RegisterView(),
         strains: (context) => const StrainsView(),
         promotions: (context) => const PromotionsView(),
         news: (context) => const NewsView(),
-        myAccount: (context) => const MyAccountview(),
-        verifyEmailRoute: (context) => const VerifyEmailView()
+        myAccount: (context) => const MyAccountView(),
       },
     );
   }
@@ -59,13 +46,24 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
+  void initState() {
+    initFirebase();
+    super.initState();
+  }
+
+  void initFirebase () async {
+    await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ScaffoldGlobalBottomNavigation(
       listOfChild: const [
         StrainsView(),
         NewsView(),
         PromotionsView(),
-        MyAccountview(),
+        MyAccountView(),
       ],
       listOfBottomNavigationItem: buildBottomNavigationItemList(),
     );

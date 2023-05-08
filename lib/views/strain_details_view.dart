@@ -1,17 +1,17 @@
 import 'package:doobie/DTO/weed_strain.dart';
 import 'package:flutter/material.dart';
 
-class StrainDetailsPage extends StatefulWidget {
+class StrainDetailsView extends StatefulWidget {
   final WeedStrain strainDetails;
 
-  const StrainDetailsPage({Key? key, required this.strainDetails})
+  const StrainDetailsView({Key? key, required this.strainDetails})
       : super(key: key);
 
   @override
-  StrainDetailsPageState createState() => StrainDetailsPageState();
+  StrainDetailsViewState createState() => StrainDetailsViewState();
 }
 
-class StrainDetailsPageState extends State<StrainDetailsPage> {
+class StrainDetailsViewState extends State<StrainDetailsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

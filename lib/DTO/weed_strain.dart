@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class WeedStrain {
   final int id;
   final String strain;
@@ -17,7 +19,7 @@ class WeedStrain {
   final String sideEffects;
   final String imgThumb;
 
-  WeedStrain({
+  const WeedStrain({
     required this.id,
     required this.strain,
     required this.thc,
@@ -37,25 +39,44 @@ class WeedStrain {
     required this.imgThumb,
   });
 
-  factory WeedStrain.fromJson(Map<String, dynamic> json) {
-    return WeedStrain(
-      id: json['id'],
-      strain: json['strain'],
-      thc: json['thc']??"Unknown",
-      cbd: json['cbd']??"Unknown",
-      cbg: json['cbg']??"Unknown",
-      strainType: json['strainType']??"Unknown",
-      climate: json['climate']??"Unknown",
-      difficulty: json['difficulty']??"Unknown",
-      indoorYieldInGramsMax: json['indoorYieldInGramsMax']??0,
-      outdoorYieldInGramsMax: json['outdoorYieldInGramsMax']??0,
-      floweringWeeksMin: json['floweringWeeksMin']??0,
-      floweringWeeksMax: json['floweringWeeksMax']??0,
-      heightInInchesMin: json['heightInInchesMin']??0,
-      heightInInchesMax: json['heightInInchesMax']??0,
-      goodEffects: json['goodEffects']??"Unknown",
-      sideEffects: json['sideEffects']??"Unknown",
-      imgThumb: json['imgThumb']??"Unknown",
-    );
-  }
+  // factory WeedStrain.fromJson(Map<String, dynamic> json) {
+  //   return WeedStrain(
+  //     id: json['id'],
+  //     strain: json['strain'],
+  //     thc: json['thc']??"Unknown",
+  //     cbd: json['cbd']??"Unknown",
+  //     cbg: json['cbg']??"Unknown",
+  //     strainType: json['strainType']??"Unknown",
+  //     climate: json['climate']??"Unknown",
+  //     difficulty: json['difficulty']??"Unknown",
+  //     indoorYieldInGramsMax: json['indoorYieldInGramsMax']??0,
+  //     outdoorYieldInGramsMax: json['outdoorYieldInGramsMax']??0,
+  //     floweringWeeksMin: json['floweringWeeksMin']??0,
+  //     floweringWeeksMax: json['floweringWeeksMax']??0,
+  //     heightInInchesMin: json['heightInInchesMin']??0,
+  //     heightInInchesMax: json['heightInInchesMax']??0,
+  //     goodEffects: json['goodEffects']??"Unknown",
+  //     sideEffects: json['sideEffects']??"Unknown",
+  //     imgThumb: json['imgThumb']??"Unknown",
+  //   );
+  // }
+
+  WeedStrain.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
+      : id = snapshot.data()['id'],
+        strain = snapshot.data()['strain'],
+        thc = snapshot.data()['thc'] ?? "Unknown",
+        cbd = snapshot.data()['cbd'] ?? "Unknown",
+        cbg = snapshot.data()['cbg'] ?? "Unknown",
+        strainType = snapshot.data()['strainType'] ?? "Unknown",
+        climate = snapshot.data()['climate'] ?? "Unknown",
+        difficulty = snapshot.data()['difficulty'] ?? "Unknown",
+        indoorYieldInGramsMax = snapshot.data()['indoorYieldInGramsMax'] ?? 0,
+        outdoorYieldInGramsMax = snapshot.data()['outdoorYieldInGramsMax'] ?? 0,
+        floweringWeeksMin = snapshot.data()['floweringWeeksMin'] ?? 0,
+        floweringWeeksMax = snapshot.data()['floweringWeeksMax'] ?? 0,
+        heightInInchesMin = snapshot.data()['heightInInchesMin'] ?? 0,
+        heightInInchesMax = snapshot.data()['heightInInchesMax'] ?? 0,
+        goodEffects = snapshot.data()['goodEffects'] ?? "Unknown",
+        sideEffects = snapshot.data()['sideEffects'] ?? "Unknown",
+        imgThumb = snapshot.data()['imgThumb'] ?? "Unknown";
 }

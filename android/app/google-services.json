@@ -14,7 +14,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "602271285218-vptqkbk9dr39ac37uqqeibo4uckan2ee.apps.googleusercontent.com",
+          "client_id": "602271285218-5rid2funlg7kh24lm1dfv4hm3jjovvm0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,8 +27,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "602271285218-vptqkbk9dr39ac37uqqeibo4uckan2ee.apps.googleusercontent.com",
+              "client_id": "602271285218-5rid2funlg7kh24lm1dfv4hm3jjovvm0.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "602271285218-dfvii7e06n245agisda6jtirmf63oceb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "borysante.me.doobie"
+              }
             }
           ]
         }
