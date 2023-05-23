@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doobie/DTO/comment.dart';
+import 'package:doobie/DTO/news.dart';
 import 'package:doobie/DTO/user_data.dart';
 import 'package:doobie/DTO/weed_strain.dart';
 import 'package:doobie/services/cloud/cloud_storage_constants.dart';
@@ -18,6 +19,8 @@ class FirebaseCloudStorage {
       FirebaseFirestore.instance.collection(commentsCollectionName);
   final userData =
       FirebaseFirestore.instance.collection(userDataCollectionName);
+  final news =
+  FirebaseFirestore.instance.collection(newsCollectionName);
 
   Stream<Iterable<WeedStrain>> getAllWeedStrains() => weedStrains
       .snapshots()
@@ -133,4 +136,8 @@ class FirebaseCloudStorage {
     await docReference.update(
         {triedStrainsArrayFieldName: userDataObjectFromFirestore.triedStrains});
   }
+
+  Stream<Iterable<News>> getAllNews() => news
+      .snapshots()
+      .map((event) => event.docs.map((doc) => News.fromSnapshot(doc)));
 }

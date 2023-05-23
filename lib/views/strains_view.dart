@@ -59,9 +59,6 @@ class _StrainsViewState extends State<StrainsView> {
             hintStyle: TextStyle(color: Colors.black),
             border: InputBorder.none,
           ),
-          onChanged: (value) {
-            // Perform search functionality here
-          },
         ),
       ),
       body: StreamBuilder(
@@ -80,7 +77,28 @@ class _StrainsViewState extends State<StrainsView> {
                     itemBuilder: (context, index) {
                       final strain = _filteredStrains.elementAt(index);
                       return ListTile(
-                        leading: Image.network(strain.imgThumb),
+                        leading: Image.network(
+                          strain.imgThumb,
+                          loadingBuilder: (BuildContext context, Widget child,
+                              ImageChunkEvent? loadingProgress) {
+                            if (loadingProgress == null) {
+                              return child;
+                            }
+                            return Center(
+                              child: CircularProgressIndicator(
+                                value: loadingProgress.expectedTotalBytes !=
+                                        null
+                                    ? loadingProgress.cumulativeBytesLoaded /
+                                        loadingProgress.expectedTotalBytes!
+                                    : null,
+                              ),
+                            );
+                          },
+                          errorBuilder: (BuildContext context, Object exception,
+                              StackTrace? stackTrace) {
+                            return const Icon(Icons.image, size: 10,);
+                          },
+                        ),
                         title: Text(strain.strain),
                         subtitle: Text(strain.strainType),
                         trailing: Text(strain.thc),
@@ -88,9 +106,9 @@ class _StrainsViewState extends State<StrainsView> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  StrainDetailsView(strainDetails: strain, firestoreService: _firestoreService)
-                            ),
+                                builder: (context) => StrainDetailsView(
+                                    strainDetails: strain,
+                                    firestoreService: _firestoreService)),
                           );
                         },
                       );
